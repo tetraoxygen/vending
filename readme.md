@@ -12,14 +12,14 @@ You extract the archive, move it into your home directory as `.vending` if you w
 Vending relies on JSON for stockkeeping because that was an established standard. The specific structure is as follows:
 
 	{
-	"item"{
-		"name": "[ITEM_NAME]"
-		"cost": [COST]
-	}
-	"item"{
-		"name": "[ITEM_NAME]"
-		"cost": [COST]
-	}
+	"items":{
+			"soda":{
+			"cost":"150"
+			},
+			"gum":{
+				"cost":"25"
+			}
+		}
 	}
 	
 It's quite simple. Vending automatically handles how to present the items. To add another item, you just follow that template again in the `stock` file.

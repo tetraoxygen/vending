@@ -1,35 +1,93 @@
 #include <iostream>
-#include <fstream>
-#include <nlohmann/json.hpp>
-
-// for convenience
-using json = nlohmann::json;
+#include <cmath>
 using namespace std;
 
-bool fexists(const char *filename) {
-	std::ifstream ifile(filename);
-	return (bool)ifile;
-}
+int main() {
 
-int main(){
+	int payment = 0;
+	string again = "y";
 
-	ifstream inFile; // Declares a FileStream variable for the vending machine's stock.
+	while (again == "y" || again == "Y") {
+		string order;
+		double price;
+		int dollarChange;
+		int quarterChange;
+		cout << "What would you like to order?" << endl;
+		cin >> order;
+		cout << "How much does it cost?" << endl;
+		cin >> price;
+		while (fmod(price, 0.25) != 0){
+			cout << "Prices have to be multiples of 25 cents." << endl;
+			cin >> price;
+		}
+		cout << "Your choices of payment methods are: " << endl;
+		cout << "1 - $1 Cash" << endl;
+		cout << "2 - $5 Cash" << endl;
+		cout << "3 - $20 Cash" << endl;
+		cout << "4 - $50 Cash" << endl;
+		cout << "5 -  Pay" << endl;
 
-	// Checks if a stockkeeping file exists. The program would otherwise crash without explanation.
-	if (fexists("../stock") == true){
-		inFile.open("../stock"); // Opens the stockkeeping file. Will crash if you don't have a stockkeeping file in the same directory that this runs in, it will crash.
-		json stock;
-		inFile >> stock;
-		cout << "© 2018 Tetraoxygen Software, Charlie Welsh" << endl;
-		cout << stock.dump();
+		cout << "How would you like to pay? (1/5): ";
+		cin >> payment;
+		cout << endl;
+
+		switch (payment) {
+			case 1 :
+				if (price - 1 > 0) {
+					cout << order << " costs more than that." << endl;
+				} else {
+					cout << "Enjoy your " << order << endl;
+					dollarChange = (int)(1-price);
+					quarterChange = fmod(price, 0.25);
+					quarterChange = quarterChange - dollarChange*4 ;
+					cout << "Your change is " << dollarChange << " dollars and " << quarterChange << " quarters." << endl;
+
+				}
+				break;
+
+			case 2 :
+				if (price - 5 > 0) {
+					cout << "A(n) " << order << " costs more than that." << endl;
+				} else {
+					cout << "Enjoy your " << order << endl;
+					dollarChange = (int)(5-price);
+					quarterChange = fmod(price, 0.25);
+					quarterChange = quarterChange - dollarChange*4 ;
+					cout << "Your change is " << dollarChange << " dollars and " << quarterChange << " quarters." << endl;
+				}
+				break;
+			case 3 :
+				if (price - 20 > 0) {
+					cout << "A(n) " << order << " costs more than that." << endl;
+				} else {
+					cout << "Enjoy your " << order << endl;
+					dollarChange = (int)(20-price);
+					quarterChange = fmod(price, 1) /4;
+					cout << quarterChange - dollarChange*4 << quarterChange << dollarChange*4;
+					cout << "Your change is " << dollarChange << " dollars and " << quarterChange << " quarters." << endl;
+				}
+				break;
+			case 4 :
+				if (price - 50 > 0) {
+					cout << "A(n) " << order << " costs more than that." << endl;
+				} else {
+					cout << "Enjoy your " << order << endl;
+					dollarChange = (int)(50-price);
+					quarterChange = fmod(price, 0.25);
+					quarterChange = quarterChange - dollarChange*4 ;
+					cout << "Your change is " << dollarChange << " dollars and " << quarterChange << " quarters." << endl;
+				}
+				break;
+			case 5 :
+				cout << "... Approved. Enjoy your " << order << endl;
+				break;
+			default :
+				cout << "Error. Choice was not valid, Here is your money back.";
+
+				break;
+		}
+		cout << "Would you like to go again? (Y/N)" << endl;
+		cin >> again;
+		cout << endl;
 	}
-	else{
-		//Outputs that the stockkeeping file will not work.
-		cout << "You don't have a stockkeeping file. Rectify this situation with the readme's guide to stockkeeping." << endl;
-		abort();
-	}
-
-
-
 }
-

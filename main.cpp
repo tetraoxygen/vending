@@ -10,6 +10,7 @@ int main() {
 	while (again == "y" || again == "Y") {
 		string order;
 		double price;
+		double newPrice;
 		int dollarChange;
 		int quarterChange;
 		cout << "What would you like to order?" << endl;
@@ -25,7 +26,7 @@ int main() {
 		cout << "2 - $5 Cash" << endl;
 		cout << "3 - $20 Cash" << endl;
 		cout << "4 - $50 Cash" << endl;
-		cout << "5 -  Pay" << endl;
+		cout << "5 - Apple Pay" << endl;
 
 		cout << "How would you like to pay? (1/5): ";
 		cin >> payment;
@@ -38,8 +39,8 @@ int main() {
 				} else {
 					cout << "Enjoy your " << order << endl;
 					dollarChange = (int)(1-price);
-					quarterChange = fmod(price, 0.25);
-					quarterChange = quarterChange - dollarChange*4 ;
+					newPrice = 1-price;
+					quarterChange = (newPrice-dollarChange) /0.25;
 					cout << "Your change is " << dollarChange << " dollars and " << quarterChange << " quarters." << endl;
 
 				}
@@ -51,8 +52,8 @@ int main() {
 				} else {
 					cout << "Enjoy your " << order << endl;
 					dollarChange = (int)(5-price);
-					quarterChange = fmod(price, 0.25);
-					quarterChange = quarterChange - dollarChange*4 ;
+					newPrice = 5-price;
+					quarterChange = (newPrice-dollarChange) /0.25;
 					cout << "Your change is " << dollarChange << " dollars and " << quarterChange << " quarters." << endl;
 				}
 				break;
@@ -62,8 +63,8 @@ int main() {
 				} else {
 					cout << "Enjoy your " << order << endl;
 					dollarChange = (int)(20-price);
-					quarterChange = fmod(price, 1) /4;
-					cout << quarterChange - dollarChange*4 << quarterChange << dollarChange*4;
+					newPrice = 20-price;
+					quarterChange = (newPrice-dollarChange) /0.25;
 					cout << "Your change is " << dollarChange << " dollars and " << quarterChange << " quarters." << endl;
 				}
 				break;
@@ -73,8 +74,8 @@ int main() {
 				} else {
 					cout << "Enjoy your " << order << endl;
 					dollarChange = (int)(50-price);
-					quarterChange = fmod(price, 0.25);
-					quarterChange = quarterChange - dollarChange*4 ;
+					newPrice = 50-price;
+					quarterChange = (newPrice-dollarChange) /0.25;
 					cout << "Your change is " << dollarChange << " dollars and " << quarterChange << " quarters." << endl;
 				}
 				break;

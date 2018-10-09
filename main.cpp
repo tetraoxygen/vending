@@ -28,7 +28,7 @@ int main() {
 		cout << "4 - $50 Cash" << endl;
 		cout << "5 - Apple Pay" << endl;
 
-		cout << "How would you like to pay? (1/5): ";
+		cout << "How would you like to pay? (1-5): ";
 		cin >> payment;
 		cout << endl;
 
